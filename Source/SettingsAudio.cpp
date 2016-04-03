@@ -117,7 +117,7 @@ void SettingsAudio::ApplySettings()
 
     //------------------------------------
 
-    int bufferTime = GlobalConfig->GetInt(TEXT("General"), TEXT("SceneBufferingTime"), 700);
+    int bufferTime = AppConfig->GetInt(TEXT("General"), TEXT("SceneBufferingTime"), 700);
 
     int micTimeOffset = (int)SendMessage(GetDlgItem(hwnd, IDC_MICTIMEOFFSET), UDM_GETPOS32, 0, 0);
     if(micTimeOffset < -bufferTime)
@@ -280,7 +280,7 @@ INT_PTR SettingsAudio::ProcMessage(UINT message, WPARAM wParam, LPARAM lParam)
 
                 //--------------------------------------------
 
-                int bufferTime = GlobalConfig->GetInt(TEXT("General"), TEXT("SceneBufferingTime"), 700);
+                int bufferTime = AppConfig->GetInt(TEXT("General"), TEXT("SceneBufferingTime"), 700);
 
                 int micTimeOffset = AppConfig->GetInt(TEXT("Audio"), TEXT("MicTimeOffset"), 0);
                 if(micTimeOffset < -bufferTime)

@@ -818,7 +818,7 @@ void OBSAPIInterface::HandleHotkeys()
     /* only query these config variables once */
     if (!set_vars)
     {
-        allow_other_hotkey_modifiers = !!GlobalConfig->GetInt(TEXT("General"), TEXT("AllowOtherHotkeyModifiers"), true);
+        allow_other_hotkey_modifiers = !!AppConfig->GetInt(TEXT("General"), TEXT("AllowOtherHotkeyModifiers"), true);
         uplay_overlay_compatibility = !!GlobalConfig->GetInt(L"General", L"UplayOverlayCompatibility", false);
         set_vars = true;
     }

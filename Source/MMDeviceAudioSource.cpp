@@ -185,7 +185,7 @@ bool MMDeviceAudioSource::Reinitialize()
     bool useInputDevice = bIsMic || AppConfig->GetInt(L"Audio", L"InputDevicesForDesktopSound", false) != 0;
 
     if (bIsMic) {
-        BOOL bMicSyncFixHack = GlobalConfig->GetInt(TEXT("Audio"), TEXT("UseMicSyncFixHack"));
+        BOOL bMicSyncFixHack = AppConfig->GetInt(TEXT("Audio"), TEXT("UseMicSyncFixHack"));
         angerThreshold = bMicSyncFixHack ? 40 : 1000;
     }
 
@@ -232,7 +232,7 @@ bool MMDeviceAudioSource::Reinitialize()
             Log(TEXT("Using auxilary audio input: %s"), GetDeviceName());
         }
 
-        bUseQPC = GlobalConfig->GetInt(TEXT("Audio"), TEXT("UseMicQPC")) != 0;
+        bUseQPC = GlobalConfig->GetInt(TEXT("Audio"), TEXT("AppConfig")) != 0;
         if (bUseQPC)
             Log(TEXT("Using Mic QPC timestamps"));
     }
@@ -245,7 +245,7 @@ bool MMDeviceAudioSource::Reinitialize()
 
         bUseVideoTime = AppConfig->GetInt(TEXT("Audio"), TEXT("SyncToVideoTime")) != 0;
 
-        int globalAdjust = GlobalConfig->GetInt(TEXT("Audio"), TEXT("GlobalAudioTimeAdjust"));
+        int globalAdjust = AppConfig->GetInt(TEXT("Audio"), TEXT("GlobalAudioTimeAdjust"));
         Log(L"Global Audio time adjust: %d", globalAdjust);
         SetTimeOffset(globalAdjust);
     }

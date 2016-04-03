@@ -129,17 +129,17 @@ void SettingsAdvanced::ApplySettings()
     //--------------------------------------------------
 
     UINT sceneBufferTime = (UINT)SendMessage(GetDlgItem(hwnd, IDC_SCENEBUFFERTIME), UDM_GETPOS32, 0, 0);
-    GlobalConfig->SetInt(TEXT("General"), TEXT("SceneBufferingTime"), sceneBufferTime);
+	AppConfig->SetInt(TEXT("General"), TEXT("SceneBufferingTime"), sceneBufferTime);
 
     //--------------------------------------------------
 
     bool bDisablePreviewEncoding = SendMessage(GetDlgItem(hwnd, IDC_DISABLEPREVIEWENCODING), BM_GETCHECK, 0, 0) == BST_CHECKED;
-    GlobalConfig->SetInt(TEXT("General"), TEXT("DisablePreviewEncoding"), bDisablePreviewEncoding);
+	AppConfig->SetInt(TEXT("General"), TEXT("DisablePreviewEncoding"), bDisablePreviewEncoding);
 
     //--------------------------------------------------
 
     bool bAllowOtherHotkeyModifiers = SendMessage(GetDlgItem(hwnd, IDC_ALLOWOTHERHOTKEYMODIFIERS), BM_GETCHECK, 0, 0) == BST_CHECKED;
-    GlobalConfig->SetInt(TEXT("General"), TEXT("AllowOtherHotkeyModifiers"), bAllowOtherHotkeyModifiers);
+	AppConfig->SetInt(TEXT("General"), TEXT("AllowOtherHotkeyModifiers"), bAllowOtherHotkeyModifiers);
     
     //--------------------------------------------------
 
@@ -202,17 +202,17 @@ void SettingsAdvanced::ApplySettings()
     //--------------------------------------------------
 
     BOOL bUseMicQPC = SendMessage(GetDlgItem(hwnd, IDC_USEMICQPC), BM_GETCHECK, 0, 0) == BST_CHECKED;
-    GlobalConfig->SetInt(TEXT("Audio"), TEXT("UseMicQPC"), bUseMicQPC);
+	AppConfig->SetInt(TEXT("Audio"), TEXT("UseMicQPC"), bUseMicQPC);
 
     //--------------------------------------------------
 
     int globalAudioTimeAdjust = (int)SendMessage(GetDlgItem(hwnd, IDC_AUDIOTIMEADJUST), UDM_GETPOS32, 0, 0);
-    GlobalConfig->SetInt(TEXT("Audio"), TEXT("GlobalAudioTimeAdjust"), globalAudioTimeAdjust);
+	AppConfig->SetInt(TEXT("Audio"), TEXT("GlobalAudioTimeAdjust"), globalAudioTimeAdjust);
 
     //--------------------------------------------------
 
     BOOL bUseMicSyncFixHack = SendMessage(GetDlgItem(hwnd, IDC_MICSYNCFIX), BM_GETCHECK, 0, 0) == BST_CHECKED;
-    GlobalConfig->SetInt(TEXT("Audio"), TEXT("UseMicSyncFixHack"), bUseMicSyncFixHack);
+	AppConfig->SetInt(TEXT("Audio"), TEXT("UseMicSyncFixHack"), bUseMicSyncFixHack);
 
     //--------------------------------------------------
 
@@ -310,7 +310,7 @@ INT_PTR SettingsAdvanced::ProcMessage(UINT message, WPARAM wParam, LPARAM lParam
 
                 //------------------------------------
 
-                UINT sceneBufferingTime = GlobalConfig->GetInt(TEXT("General"), TEXT("SceneBufferingTime"), 700);
+                UINT sceneBufferingTime = AppConfig->GetInt(TEXT("General"), TEXT("SceneBufferingTime"), 700);
                 SendMessage(GetDlgItem(hwnd, IDC_SCENEBUFFERTIME), UDM_SETRANGE32, 60, 20000);
                 SendMessage(GetDlgItem(hwnd, IDC_SCENEBUFFERTIME), UDM_SETPOS32, 0, sceneBufferingTime);
 
@@ -337,12 +337,12 @@ INT_PTR SettingsAdvanced::ProcMessage(UINT message, WPARAM wParam, LPARAM lParam
 
                 //------------------------------------
 
-                bool bDisablePreviewEncoding = GlobalConfig->GetInt(TEXT("General"), TEXT("DisablePreviewEncoding"), false) != 0;
+                bool bDisablePreviewEncoding = AppConfig->GetInt(TEXT("General"), TEXT("DisablePreviewEncoding"), false) != 0;
                 SendMessage(GetDlgItem(hwnd, IDC_DISABLEPREVIEWENCODING), BM_SETCHECK, bDisablePreviewEncoding ? BST_CHECKED : BST_UNCHECKED, 0);
 
                 //------------------------------------
 
-                bool bAllowOtherHotkeyModifiers = GlobalConfig->GetInt(TEXT("General"), TEXT("AllowOtherHotkeyModifiers"), true) != 0;
+                bool bAllowOtherHotkeyModifiers = AppConfig->GetInt(TEXT("General"), TEXT("AllowOtherHotkeyModifiers"), true) != 0;
                 SendMessage(GetDlgItem(hwnd, IDC_ALLOWOTHERHOTKEYMODIFIERS), BM_SETCHECK, bAllowOtherHotkeyModifiers ? BST_CHECKED : BST_UNCHECKED, 0);
 
                 //--------------------------------------------
@@ -479,19 +479,19 @@ INT_PTR SettingsAdvanced::ProcMessage(UINT message, WPARAM wParam, LPARAM lParam
 
                 //------------------------------------
 
-                bool bUseMicQPC = GlobalConfig->GetInt(TEXT("Audio"), TEXT("UseMicQPC")) != 0;
+                bool bUseMicQPC = AppConfig->GetInt(TEXT("Audio"), TEXT("UseMicQPC")) != 0;
                 SendMessage(GetDlgItem(hwnd, IDC_USEMICQPC), BM_SETCHECK, bUseMicQPC ? BST_CHECKED : BST_UNCHECKED, 0);
 
                 //------------------------------------
 
-                BOOL bMicSyncFixHack = GlobalConfig->GetInt(TEXT("Audio"), TEXT("UseMicSyncFixHack"));
+                BOOL bMicSyncFixHack = AppConfig->GetInt(TEXT("Audio"), TEXT("UseMicSyncFixHack"));
                 SendMessage(GetDlgItem(hwnd, IDC_MICSYNCFIX), BM_SETCHECK, bMicSyncFixHack ? BST_CHECKED : BST_UNCHECKED, 0);
 
                 //------------------------------------
 
-                int bufferTime = GlobalConfig->GetInt(TEXT("General"), TEXT("SceneBufferingTime"), 700);
+                int bufferTime = AppConfig->GetInt(TEXT("General"), TEXT("SceneBufferingTime"), 700);
 
-                int globalAudioTimeAdjust = GlobalConfig->GetInt(TEXT("Audio"), TEXT("GlobalAudioTimeAdjust"));
+                int globalAudioTimeAdjust = AppConfig->GetInt(TEXT("Audio"), TEXT("GlobalAudioTimeAdjust"));
                 SendMessage(GetDlgItem(hwnd, IDC_AUDIOTIMEADJUST), UDM_SETRANGE32, -bufferTime, 5000);
                 SendMessage(GetDlgItem(hwnd, IDC_AUDIOTIMEADJUST), UDM_SETPOS32, 0, globalAudioTimeAdjust);
 
