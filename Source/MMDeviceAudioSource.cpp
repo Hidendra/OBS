@@ -232,7 +232,7 @@ bool MMDeviceAudioSource::Reinitialize()
             Log(TEXT("Using auxilary audio input: %s"), GetDeviceName());
         }
 
-        bUseQPC = GlobalConfig->GetInt(TEXT("Audio"), TEXT("AppConfig")) != 0;
+        bUseQPC = AppConfig->GetInt(TEXT("Audio"), TEXT("UseMicQPC")) != 0;
         if (bUseQPC)
             Log(TEXT("Using Mic QPC timestamps"));
     }
